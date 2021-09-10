@@ -97,16 +97,6 @@ export default function Layout( { blockEditorSettings } ) {
 		isMenuSelected
 	);
 
-	// Conditionally render at Layout level to ensure main content
-	// is visible on mobile.
-	const renderSecondarySidebar = () => {
-		if ( isInserterOpened ) {
-			return <InserterSidebar />;
-		}
-
-		return null;
-	};
-
 	return (
 		<ErrorBoundary>
 			<div
@@ -184,7 +174,9 @@ export default function Layout( { blockEditorSettings } ) {
 									<ComplementaryArea.Slot scope="core/edit-navigation" />
 								)
 							}
-							secondarySidebar={ renderSecondarySidebar() }
+							secondarySidebar={
+								isInserterOpened && <InserterSidebar />
+							}
 						/>
 						{ isMenuSelected && (
 							<Sidebar
